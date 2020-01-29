@@ -19,7 +19,7 @@ export const store = {
     auth: async ({ commit }, payload) => {
       try {
         const { data } = await api(`/users/signin/callback?code=${payload}`)
-        
+
         Auth.login(data.access_token)
         commit('auth', data.access_token)
         router.push({ name: 'Feed' })
