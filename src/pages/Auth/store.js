@@ -4,7 +4,7 @@ import router from '../../router'
 
 export const store = {
   state: {
-    url_oauth: `${process.env.VUE_APP_API_URL}/users/github/oauth`,
+    url_oauth: `${process.env.VUE_APP_API_CURRENT_VERSION}/users/github/oauth`,
     token: null
   },
   getters: {

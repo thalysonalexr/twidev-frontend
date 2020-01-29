@@ -2,7 +2,7 @@ import axios from 'axios'
 import Auth from './auth'
 
 const api = axios.create({
-  baseURL: process.env.VUE_APP_API_URL,
+  baseURL: process.env.VUE_APP_API_CURRENT_VERSION,
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json'

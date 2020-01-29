@@ -73,7 +73,7 @@ export const store = {
       }
     },
     serviceConnect: async ({ commit }, payload) => {
-      const server = 'http://localhost:3000'
+      const server = process.env.VUE_APP_API_URL
       const socket = io(server, {
         query: { user: payload.username }
       })
