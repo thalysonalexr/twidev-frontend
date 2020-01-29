@@ -8,8 +8,8 @@ export const store = {
   state: {
     tweet: {},
     tweets: [],
-    users: [],
     user: {},
+    users: [],
     like: {},
     countUsers: 0,
     disconnected: false,
@@ -65,7 +65,8 @@ export const store = {
 
         commit('serviceNewTweet', data)
       } catch (err) {
-        console.log(err)
+        const { status } = err.response
+        console.log(status)
       }
     },
     serviceGetUser: async ({ commit, dispatch }) => {
