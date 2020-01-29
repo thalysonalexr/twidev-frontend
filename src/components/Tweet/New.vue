@@ -89,7 +89,7 @@ export default {
       this.counter = this.newTweet.length
     },
     createTweet () {
-      if (!this.newTweet) {
+      if ( ! this.newTweet.trim()) {
         this.error.message = 'Type something to Tweed!'
         this.error.show = true
       } else {
