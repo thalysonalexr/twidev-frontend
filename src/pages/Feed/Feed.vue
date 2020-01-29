@@ -51,8 +51,7 @@ export default {
   name: 'Feed',
   data () {
     return {
-      show: false,
-      isLoading: false
+      show: false
     }
   },
   components: {
@@ -79,14 +78,13 @@ export default {
       'user',
       'countUsers',
       'disconnected',
-      'messageError'
+      'messageError',
+      'isLoading'
     ])
   },
   created () {
     const api = async () => {
-      this.isLoading = true
       await this.serviceGetUser()
-      this.isLoading = false
     }
 
     api()

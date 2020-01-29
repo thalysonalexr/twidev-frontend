@@ -1,6 +1,7 @@
 import io from 'socket.io-client'
 
 import api from '../../services/api'
+import Auth from '../../services/auth'
 import router from '../../router'
 
 export const store = {
@@ -12,7 +13,8 @@ export const store = {
     like: {},
     countUsers: 0,
     disconnected: false,
-    messageError: ''
+    messageError: null,
+    isLoading: false
   },
   mutations: {
     serviceNewTweet: (state, payload) => {
@@ -38,6 +40,9 @@ export const store = {
     },
     setCountUsers: (state, payload) => {
       state.countUsers = payload
+    },
+    setLoading: (state, payload) => {
+      state.isLoading = payload
     }
   },
   getters: {
@@ -48,7 +53,8 @@ export const store = {
     like: state => state.like,
     countUsers: state => state.countUsers,
     disconnected: state => state.disconnected,
-    messageError: state => state.messageError
+    messageError: state => state.messageError,
+    isLoading: state => state.isLoading
   },
   actions: {
     serviceNewTweet: async ({ commit }, payload) => {
@@ -68,7 +74,16 @@ export const store = {
 
         commit('serviceGetUser', data)
         dispatch('serviceConnect', data)
+        commit('setLoading', false)
       } catch (err) {
+        Auth.logout()
+        commit('setError', {
+          show: true,
+          message: `Oops! For this application to work
+            correctly, your user on your Github account
+            must have "Name, Biography and Avatar" filled in.`
+        })
+        commit('setLoading', false)
         router.push({ name: 'Auth' })
       }
     },
@@ -98,13 +113,16 @@ export const store = {
       socket.on('show-max-connections', () => {
         console.log('Max limit of connections.')
         commit('setDisconnected', true)
-        commit('setMessageError', 'The server has reached maximum connections. Do not close this window, you can enter at any time :)')
+        commit('setMessageError', `The server has reached maximum
+          connections. Do not close this window, you can enter at
+          any time :)`)
       })
 
       socket.on('client-multi-connections', () => {
         console.log('The client be connected in multiples windows.')
         commit('setDisconnected', true)
-        commit('setMessageError', 'Please use only one of the application guides. After closing, refresh the page.')
+        commit('setMessageError', `Please use only one of the
+          application guides. After closing, refresh the page.`)
       })
 
       socket.on('user-disconnected', (id) => {

@@ -43,19 +43,11 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Auth',
-  data () {
-    return {
-      error: {
-        show: false,
-        message: ''
-      }
-    }
-  },
   components: {
     'v-error': Error
   },
   computed: {
-    ...mapGetters(['url_oauth'])
+    ...mapGetters(['url_oauth', 'error'])
   },
   methods: {
     ...mapActions(['auth'])
@@ -120,6 +112,7 @@ h2{
   display: block;
   position: absolute;
   bottom: 0px;
+  z-index: -10000;
 }
 
 .left{ left: 10px; }

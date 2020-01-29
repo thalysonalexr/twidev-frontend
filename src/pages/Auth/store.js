@@ -5,14 +5,22 @@ import router from '../../router'
 export const store = {
   state: {
     url_oauth: `${process.env.VUE_APP_API_CURRENT_VERSION}/users/github/oauth`,
-    token: null
+    token: null,
+    error: {
+      show: false,
+      message: null
+    }
   },
   getters: {
-    url_oauth: state => state.url_oauth
+    url_oauth: state => state.url_oauth,
+    error: state => state.error
   },
   mutations: {
     auth: (state, payload) => {
       state.token = payload
+    },
+    setError: (state, payload) => {
+      state.error = payload
     }
   },
   actions: {
