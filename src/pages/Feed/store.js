@@ -145,10 +145,10 @@ export const store = {
     },
     likeOrDislike: async ({ commit }, payload) => {
       try {
-        const { data, status } = await api.post(`/tweets/${payload}/like`)
+        const { data, status } = await api.put(`/tweets/${payload}/like`)
         
         if (status === 204) {
-           const { data } = await api.post(`/tweets/${payload}/dislike`)
+           const { data } = await api.put(`/tweets/${payload}/dislike`)
 
            commit('setLike', data)
            return;
