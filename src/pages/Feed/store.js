@@ -69,7 +69,7 @@ export const store = {
         commit('serviceGetUser', data)
         dispatch('serviceConnect', data)
       } catch (err) {
-        router.push({ name: 'Authenticate' })
+        router.push({ name: 'Auth' })
       }
     },
     serviceConnect: async ({ commit }, payload) => {
