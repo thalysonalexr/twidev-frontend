@@ -119,13 +119,6 @@ export const store = {
           any time :)`)
       })
 
-      socket.on('client-multi-connections', () => {
-        console.log('The client be connected in multiples windows.')
-        commit('setDisconnected', true)
-        commit('setMessageError', `Please use only one of the
-          application guides. After closing, refresh the page.`)
-      })
-
       socket.on('user-disconnected', (id) => {
         console.log(`The client id(${id}) is disconnected.`)
       })
