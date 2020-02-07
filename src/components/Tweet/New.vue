@@ -7,6 +7,7 @@
             <button
               type="button"
               class="btn-close"
+              title="Close post"
               @click="$emit('close')">
               <font-awesome-icon class="close" icon="times" />
             </button>
@@ -150,10 +151,16 @@ textarea#tweet{
   height: 100%;
   padding: 10% 0;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
-.wrapper form{ height: 100%; }
+.wrapper form{
+  height: 100%;
+  width: 100%;
+  max-width: 600px;
+}
 
 .btn-tweet{
   padding: 2%;
@@ -207,6 +214,10 @@ textarea#tweet{
   font-style: italic;
   color: #f5f5f5;
   font-size: 1em;
+}
+
+@media all and (min-width: 992px) {
+  .bio{ margin: 2% 0; }
 }
 
 </style>

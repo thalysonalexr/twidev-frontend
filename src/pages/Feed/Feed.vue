@@ -6,35 +6,37 @@
     <v-navbar
       :user="user"
       :users-connected="countUsers"/>
-    <v-message
-      v-if="disconnected"
-      :message="messageError"/>
-    <!-- init feed -->
-    <div
-      class="tweets"
-      :key="index"
-      v-for="(tweet, index) in tweets">
-      <new-post
-        :tweet="tweet"/>
+    <div class="container">
+      <v-message
+        v-if="disconnected"
+        :message="messageError"/>
+      <!-- init feed -->
+      <div
+        class="tweets"
+        :key="index"
+        v-for="(tweet, index) in tweets">
+        <new-post
+          :tweet="tweet"/>
+      </div>
+      <!-- end -->
+      <transition name="bounce">
+        <new-tweet
+          v-if="show"
+          :bio="user.bio"
+          :avatar="user.avatar"
+          @close="show = false"
+          @createTweet="createTweet($event)"/>
+      </transition>
+      <button
+        @click="show = true"
+        class="float-button bottom rounded"
+        title="New Tweed!">
+        <img
+          class="logo-tweetar"
+          src="../../assets/tweet.svg"
+          alt="Avatar tweet">
+      </button>
     </div>
-    <!-- end -->
-    <transition name="bounce">
-      <new-tweet
-        v-if="show"
-        :bio="user.bio"
-        :avatar="user.avatar"
-        @close="show = false"
-        @createTweet="createTweet($event)"/>
-    </transition>
-    <button
-      @click="show = true"
-      class="float-button bottom rounded"
-      title="New Tweed!">
-      <img
-        class="logo-tweetar"
-        src="../../assets/tweet.svg"
-        alt="Avatar tweet">
-    </button>
   </section>
 </template>
 
@@ -99,6 +101,10 @@ section#feed{
   flex-direction: column;
   width: 100%;
   height: 100%;
+}
+
+.container{
+  max-width: 600px;
 }
 
 .tweets{ width: 100%; }

@@ -173,4 +173,19 @@ li a.item-menu{
   background-color: rgba(21, 32, 43);
 }
 
+@media all and (min-width: 992px) {
+  .brand-logo{
+    font-size: 1.7rem;
+    position: unset;
+    margin-left: 20px;
+  }
+
+  .nav-wrapper{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #nav-mobile{ margin-right: 20px; }
+}
+
 </style>
