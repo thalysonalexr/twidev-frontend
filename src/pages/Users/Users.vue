@@ -1,28 +1,30 @@
 <template>
-  <section class="users-online">
+  <section id="users-online">
     <v-loading
       :is-loading="isLoading"/>
     <v-navbar
       :user="user"
       :users-connected="countUsers"/>
-    <div
-      class="card"
-      v-for="(user, index) in users" :key="index">
-      <img
-        class="avatar"
-        :src="user.avatar"
-        :alt="'Avatar of ' + user.name">
-      <div class="wrapper-column">
-        <span class="text name">
-          {{ user.name }}
-        </span>
-        <div class="wrapper-row">
-          <span class="text username">
-            @{{ user.username }}
+    <div class="users-online">
+      <div
+        class="card"
+        v-for="(user, index) in users" :key="index">
+        <img
+          class="avatar"
+          :src="user.avatar"
+          :alt="'Avatar of ' + user.name">
+        <div class="wrapper-column">
+          <span class="text name">
+            {{ user.name }}
           </span>
-          <span class="text tweets">
-            {{ user.total_tweets }}&nbsp;tweeds
-          </span>
+          <div class="wrapper-row">
+            <span class="text username">
+              @{{ user.username }}
+            </span>
+            <span class="text tweets">
+              {{ user.total_tweets }}&nbsp;tweeds
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -60,12 +62,22 @@ export default {
 
 <style scoped>
 
-.users-online{
+section#users-online{
   width: 100%;
   height: 100%;
 }
 
+.users-online{
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+}
+
 .card{
+  width: 100%;
   display: flex;
   align-content: space-between;
   border: 1px solid rgba(160,160,255,0.2);
