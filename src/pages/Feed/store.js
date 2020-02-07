@@ -91,7 +91,7 @@ export const store = {
     serviceConnect: async ({ commit }, payload) => {
       const server = process.env.VUE_APP_API_URL
       const socket = io(server, {
-        query: { user: payload.username }
+        query: { user: payload._id }
       })
 
       socket.on('connect', async () => {
@@ -119,13 +119,6 @@ export const store = {
           any time :)`)
       })
 
-      socket.on('client-multi-connections', () => {
-        console.log('The client be connected in multiples windows.')
-        commit('setDisconnected', true)
-        commit('setMessageError', `Please use only one of the
-          application guides. After closing, refresh the page.`)
-      })
-
       socket.on('user-disconnected', (id) => {
         console.log(`The client id(${id}) is disconnected.`)
       })
@@ -136,7 +129,14 @@ export const store = {
       })
 
       socket.on('bootstrap', (users) => {
-        commit('setUsers', users)
+        const usersConnected = []
+
+        Object.keys(users).map(async (userId) => {
+          const { data } = await api.get(`/users/${userId}`)
+          usersConnected.push(data)
+        })
+
+        commit('setUsers', usersConnected)
       })
 
       socket.on('new-tweet', (tweets) => {

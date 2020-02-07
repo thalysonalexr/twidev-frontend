@@ -85,11 +85,7 @@ export default {
     ])
   },
   created () {
-    const api = async () => {
-      await this.serviceGetUser()
-    }
-
-    api()
+    this.serviceGetUser()
   }
 }
 </script>
