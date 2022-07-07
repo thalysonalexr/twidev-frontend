@@ -14,7 +14,7 @@
     "axios": "^0.19.2",
     "core-js": "^3.4.4",
     "materialize-css": "^1.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "please-wait": "^0.0.5",
     "socket.io": "^2.3.0",
     "spinkit": "^2.0.1",
